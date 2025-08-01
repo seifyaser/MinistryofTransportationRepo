@@ -25,7 +25,7 @@ class _MonthlyRevenueScreenState extends State<MonthlyRevenueScreen> {
           CustomHeader(title: 'الايرادات و حركة النشاط الشهرية'),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.all(12),
+              padding: const EdgeInsets.all(10),
               child: ListView(
                 children: [
                   // Search Section
