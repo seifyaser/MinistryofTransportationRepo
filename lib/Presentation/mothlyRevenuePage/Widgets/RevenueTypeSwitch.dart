@@ -17,8 +17,9 @@ class RevenueTypeSwitch extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          // زر "نسبة الإيرادات"
-          Expanded(
+          // button 1
+           Flexible(
+            fit: FlexFit.tight,
             child: ElevatedButton.icon(
               onPressed: () => onChanged(false),
               style: ElevatedButton.styleFrom(
@@ -27,25 +28,22 @@ class RevenueTypeSwitch extends StatelessWidget {
                     : const Color(0xFF38628B),
                 foregroundColor:
                     showRevenuePercentage ? Colors.black87 : Colors.white,
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(10),
-                    bottomRight: Radius.circular(10),
-                  ),
+                padding: const EdgeInsets.symmetric(vertical: 12),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30),
                 ),
                 elevation: showRevenuePercentage ? 0 : 2,
               ),
-              icon: const Icon(Icons.table_chart),
-              label: const Text(
-                "نسبة الإيرادات",
-                style: TextStyle(fontSize: 14),
-              ),
+              icon: const Icon(Icons.pie_chart),
+              label: const Text("نسبة الإيرادات", style: TextStyle(fontSize: 14)),
             ),
           ),
 
-          // زر "جدول الإيرادات"
-          Expanded(
+          const SizedBox(width: 12),
+
+// button 2
+          Flexible(
+            fit: FlexFit.tight,
             child: ElevatedButton.icon(
               onPressed: () => onChanged(true),
               style: ElevatedButton.styleFrom(
@@ -54,20 +52,14 @@ class RevenueTypeSwitch extends StatelessWidget {
                     : Colors.grey[200],
                 foregroundColor:
                     showRevenuePercentage ? Colors.white : Colors.black87,
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(10),
-                    bottomLeft: Radius.circular(10),
-                  ),
+                padding: const EdgeInsets.symmetric(vertical: 12),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30),
                 ),
                 elevation: showRevenuePercentage ? 2 : 0,
               ),
               icon: const Icon(Icons.insert_chart),
-              label: const Text(
-                "جدول الإيرادات",
-                style: TextStyle(fontSize: 14),
-              ),
+              label: const Text("جدول الإيرادات", style: TextStyle(fontSize: 14)),
             ),
           ),
         ],

@@ -18,6 +18,8 @@ class CustomDateField extends StatelessWidget {
       textAlign: TextAlign.right,
       textDirection: TextDirection.rtl,
       decoration: InputDecoration(
+        filled: true,
+        fillColor: Color(0xffEFEFEF),
         hintText: hintText,
         hintTextDirection: TextDirection.rtl,
         prefixIcon: Icon(Icons.calendar_today, color: Colors.grey[600]),

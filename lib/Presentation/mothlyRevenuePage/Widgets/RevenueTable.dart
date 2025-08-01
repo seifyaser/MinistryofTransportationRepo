@@ -1,153 +1,157 @@
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
-class RevenueTable extends StatelessWidget {
-  const RevenueTable({super.key});
+class RevenueBarChart extends StatelessWidget {
+  const RevenueBarChart({super.key});
 
   @override
   Widget build(BuildContext context) {
+    return Column(
+      children: [
+        _buildChartCard(),
+        const SizedBox(height: 10),
+      ],
+    );
+  }
+
+  Widget _buildChartCard() {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20),
       padding: const EdgeInsets.all(15),
-      decoration: _boxDecoration(),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(15),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            spreadRadius: 2,
+            blurRadius: 5,
+            offset: const Offset(0, 3),
+          ),
+        ],
+      ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          _buildTitle(),
-          const SizedBox(height: 10),
-          _buildSearchField(),
-          const SizedBox(height: 15),
-          _buildRows(),
+          SizedBox(
+            height: 250,
+            child: BarChart(
+              BarChartData(
+                maxY: 18,
+                barGroups: _buildBarGroups(),
+                gridData: FlGridData(
+                  show: true,
+                  drawVerticalLine: true,
+                  drawHorizontalLine: true,
+                  getDrawingHorizontalLine: (value) {
+                    return const FlLine(
+                      color: Color(0xFFD3D3D3), 
+                      strokeWidth: 2, 
+                    );
+                  },
+                  getDrawingVerticalLine: (value) {
+                    return const FlLine(
+                      color: Color(0xffececec), 
+                      strokeWidth: 1,
+                    );
+                  },
+                ),
+                borderData: FlBorderData(show: false),
+                barTouchData: BarTouchData(enabled: false),
+                titlesData: FlTitlesData(
+                  bottomTitles: AxisTitles(
+                    sideTitles: SideTitles(
+                      showTitles: true,
+                      getTitlesWidget: (value, meta) => const SizedBox.shrink(),
+                    ),
+                  ),
+                  leftTitles: AxisTitles(
+                    sideTitles: SideTitles(
+                      showTitles: true,
+                      reservedSize: 30,
+                      interval: 2,
+                      getTitlesWidget: (value, meta) {
+                        if (value % 2 == 0 && value >= 2 && value <= 18) {
+                          return Text(
+                            value.toInt().toString(),
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 12,
+                            ),
+                          );
+                        } else {
+                          return const SizedBox.shrink();
+                        }
+                      },
+                    ),
+                  ),
+                  topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                  rightTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 12),
+          _buildLegend(),
         ],
       ),
     );
   }
 
-  BoxDecoration _boxDecoration() {
-    return BoxDecoration(
-      color: Colors.white,
-      borderRadius: BorderRadius.circular(15),
-      boxShadow: [
-        BoxShadow(
-          color: Colors.black.withOpacity(0.1),
-          spreadRadius: 2,
-          blurRadius: 5,
-          offset: Offset(0, 3),
-        ),
-      ],
-    );
+  List<BarChartGroupData> _buildBarGroups() {
+    final data = [
+      {'label': 'خدمات عربات النوم', 'value': 10.39, 'color': Colors.yellow[600]},
+      {'label': 'خصم عربات النوم', 'value': 16.88, 'color': Colors.orange[600]},
+    ];
+
+    return List.generate(data.length, (index) {
+      final item = data[index];
+      final double value = item['value'] as double;
+      final Color color = item['color'] as Color;
+
+      return BarChartGroupData(
+        x: index,
+        barRods: [
+          BarChartRodData(
+            toY: value,
+            width: 30,
+            borderRadius: BorderRadius.circular(0),
+            color: color,
+          ),
+        ],
+        showingTooltipIndicators: [],
+        barsSpace: 10,
+      );
+    });
   }
 
-  Widget _buildTitle() {
-    return Text(
-      'جدول الايرادات و الحركات الشهرية',
-      style: TextStyle(
-        fontSize: 16,
-        fontWeight: FontWeight.bold,
-        color: Color(0xFF38628B),
-      ),
-      textDirection: TextDirection.rtl,
-    );
-  }
-
-  Widget _buildSearchField() {
-    return TextField(
-      textAlign: TextAlign.right,
-      textDirection: TextDirection.rtl,
-      decoration: InputDecoration(
-        hintText: 'بحث في جدول الايرادات و الحركات الشهرية',
-        hintTextDirection: TextDirection.rtl,
-        prefixIcon: Icon(Icons.search, color: Colors.grey[600]),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide.none,
-        ),
-        filled: true,
-        fillColor: Colors.grey[100],
-        contentPadding: const EdgeInsets.symmetric(
-          vertical: 10,
-          horizontal: 15,
-        ),
-      ),
-    );
-  }
-
-  Widget _buildRows() {
-    return Column(
-      children: [
-        _buildTableRow('اسم الجهة', '', isHeader: true),
-        _buildTableRow(
-          'الهيئة القومية لسكك الحديد',
-          '.............................................',
-        ),
-        const SizedBox(height: 15),
-        _buildTableRow('قيمة الايراد', '', isHeader: true),
-        _buildTableRow('الفترة المقابلة عام سابق', '460,254,853'),
-        _buildTableRow('الفترة المحددة', '662,612,400'),
-        _buildTableRow('الفرق', '202,357,547'),
-        const SizedBox(height: 15),
-        _buildDetailsLink(),
-        const SizedBox(height: 15),
-        _buildTableRow('اسم الحزمة', '', isHeader: true),
-      ],
-    );
-  }
-
-  Widget _buildTableRow(String label, String value, {bool isHeader = false}) {
+  Widget _buildLegend() {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4),
+      padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
-            value,
-            style: TextStyle(
-              fontSize: isHeader ? 14 : 13,
-              color: isHeader ? Colors.black : Colors.grey[700],
-              fontWeight: isHeader ? FontWeight.bold : FontWeight.normal,
-            ),
-            textDirection: TextDirection.rtl,
-          ),
-          Expanded(
-            child: Text(
-              label,
-              textAlign: TextAlign.right,
-              textDirection: TextDirection.rtl,
-              style: TextStyle(
-                fontSize: isHeader ? 14 : 13,
-                color: isHeader ? Colors.black : Colors.grey[700],
-                fontWeight: isHeader ? FontWeight.bold : FontWeight.normal,
-              ),
-            ),
-          ),
+          _legendItem('خصم عربات النوم', Colors.orange[600]!),
+          const SizedBox(width: 20),
+          _legendItem('خدمات عربات النوم', Colors.yellow[600]!),
         ],
       ),
     );
   }
 
-  Widget _buildDetailsLink() {
-    return Align(
-      alignment: Alignment.centerRight,
-      child: InkWell(
-        onTap: () {
-          print('تفاصيل الجهة tapped');
-        },
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: const [
-            Text(
-              'تفاصيل الجهة',
-              style: TextStyle(
-                color: Color(0xFF38628B),
-                fontSize: 14,
-                decoration: TextDecoration.underline,
-              ),
-              textDirection: TextDirection.rtl,
-            ),
-            SizedBox(width: 5),
-            Icon(Icons.arrow_back, color: Color(0xFF38628B), size: 18),
-          ],
+  Widget _legendItem(String label, Color color) {
+    return Row(
+      children: [
+        Container(
+          width: 10,
+          height: 10,
+          decoration: BoxDecoration(
+            color: color,
+            shape: BoxShape.circle,
+          ),
         ),
-      ),
+        const SizedBox(width: 6),
+        Text(label, style: const TextStyle(fontSize: 12)),
+      ],
     );
   }
 }

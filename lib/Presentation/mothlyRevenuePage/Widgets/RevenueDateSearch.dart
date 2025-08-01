@@ -16,7 +16,7 @@ class RevenueDateSearch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+      margin: const EdgeInsets.symmetric(horizontal: 20),
       padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
         color: Colors.white,

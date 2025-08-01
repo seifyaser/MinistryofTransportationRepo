@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:project/Presentation/mothlyRevenuePage/Widgets/CustomBarChart.dart';
+import 'package:project/Presentation/mothlyRevenuePage/Widgets/RevenueTable.dart';
 import 'package:project/Presentation/mothlyRevenuePage/Widgets/CustomHeader.dart';
 import 'package:project/Presentation/mothlyRevenuePage/Widgets/RevenueDateSearch.dart';
-import 'package:project/Presentation/mothlyRevenuePage/Widgets/RevenueTable.dart';
+import 'package:project/Presentation/mothlyRevenuePage/Widgets/RevenuePercentage.dart';
 import 'package:project/Presentation/mothlyRevenuePage/Widgets/RevenueTypeSwitch.dart';
 import 'package:project/Presentation/mothlyRevenuePage/Widgets/TotalRevenueAuthoritiesCard.dart';
 
@@ -25,43 +24,46 @@ class _MonthlyRevenueScreenState extends State<MonthlyRevenueScreen> {
         children: [
           CustomHeader(title: 'الايرادات و حركة النشاط الشهرية'),
           Expanded(
-            child: ListView(
-              children: [
-                // Search Section
-                RevenueDateSearch(
-                  fromDateController: _fromDateController,
-                  toDateController: _toDateController,
-                  onSearchPressed: () {
-                    print(
-                      'البحث من: ${_fromDateController.text} إلى ${_toDateController.text}',
-                    );
-                  },
-                ),
-                const SizedBox(height: 20),
-
-                RevenueTypeSwitch(
-                  showRevenuePercentage: _showRevenuePercentage,
-                  onChanged: (value) {
-                    setState(() {
-                      _showRevenuePercentage = value;
-                    });
-                  },
-                ),
-
-                const SizedBox(height: 20),
-
-                if (_showRevenuePercentage)
-                  CustomBarChart()
-                else
-                  RevenueTable(),
-
-                const SizedBox(height: 20),
-
-                // Total Revenue in Authorities Section
-                const TotalRevenueInAuthoritiesCard(),
-
-                const SizedBox(height: 20),
-              ],
+            child: Padding(
+              padding: const EdgeInsets.all(12),
+              child: ListView(
+                children: [
+                  // Search Section
+                  RevenueDateSearch(
+                    fromDateController: _fromDateController,
+                    toDateController: _toDateController,
+                    onSearchPressed: () {
+                      print(
+                        'البحث من: ${_fromDateController.text} إلى ${_toDateController.text}',
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 20),
+              
+                  RevenueTypeSwitch(
+                    showRevenuePercentage: _showRevenuePercentage,
+                    onChanged: (value) {
+                      setState(() {
+                        _showRevenuePercentage = value;
+                      });
+                    },
+                  ),
+              
+                  const SizedBox(height: 20),
+              
+                  if (_showRevenuePercentage)
+                    RevenueBarChart()
+                  else
+                    RevenuePercentaage(),
+              
+                  const SizedBox(height: 20),
+              
+                  // Total Revenue in Authorities Section
+                  const TotalRevenueInAuthoritiesCard(),
+              
+                  const SizedBox(height: 20),
+                ],
+              ),
             ),
           ),
         ],
