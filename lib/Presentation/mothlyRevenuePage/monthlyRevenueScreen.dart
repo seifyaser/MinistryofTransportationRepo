@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project/Presentation/mothlyRevenuePage/Widgets/RevenueTable.dart';
-import 'package:project/Presentation/mothlyRevenuePage/Widgets/CustomHeader.dart';
-import 'package:project/Presentation/mothlyRevenuePage/Widgets/RevenueDateSearch.dart';
+import 'package:project/Widgets/CustomHeader.dart';
+import 'package:project/Widgets/RevenueDateSearch.dart';
 import 'package:project/Presentation/mothlyRevenuePage/Widgets/RevenuePercentage.dart';
 import 'package:project/Presentation/mothlyRevenuePage/Widgets/RevenueTypeSwitch.dart';
 import 'package:project/Presentation/mothlyRevenuePage/Widgets/TotalRevenueAuthoritiesCard.dart';
@@ -43,9 +43,7 @@ class _MonthlyRevenueScreenState extends State<MonthlyRevenueScreen> {
                   RevenueTypeSwitch(
                     showRevenuePercentage: _showRevenuePercentage,
                     onChanged: (value) {
-                      setState(() {
-                        _showRevenuePercentage = value;
-                      });
+                      setState(() {_showRevenuePercentage = value; });
                     },
                   ),
               
@@ -54,7 +52,7 @@ class _MonthlyRevenueScreenState extends State<MonthlyRevenueScreen> {
                   if (_showRevenuePercentage)
                     RevenueBarChart()
                   else
-                    RevenuePercentaage(),
+                    RevenuePieChartPercentaage(),
               
                   const SizedBox(height: 20),
               
