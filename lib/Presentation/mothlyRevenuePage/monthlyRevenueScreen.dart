@@ -5,6 +5,8 @@ import 'package:project/Widgets/RevenueDateSearch.dart';
 import 'package:project/Presentation/mothlyRevenuePage/Widgets/RevenuePercentage.dart';
 import 'package:project/Presentation/mothlyRevenuePage/Widgets/RevenueTypeSwitch.dart';
 import 'package:project/Presentation/mothlyRevenuePage/Widgets/TotalRevenueAuthoritiesCard.dart';
+import 'package:project/Widgets/ShowEmptyWidget.dart';
+import 'package:project/utils/visibilityHelper.dart';
 
 class MonthlyRevenueScreen extends StatefulWidget {
   @override
@@ -14,7 +16,7 @@ class MonthlyRevenueScreen extends StatefulWidget {
 class _MonthlyRevenueScreenState extends State<MonthlyRevenueScreen> {
   final TextEditingController _fromDateController = TextEditingController();
   final TextEditingController _toDateController = TextEditingController();
-
+  bool _showResults = false;
   bool _showRevenuePercentage = true;
 
   @override
@@ -28,39 +30,53 @@ class _MonthlyRevenueScreenState extends State<MonthlyRevenueScreen> {
               padding: const EdgeInsets.all(10),
               child: ListView(
                 children: [
-                  // Search Section
+
                   RevenueDateSearch(
                     fromDateController: _fromDateController,
                     toDateController: _toDateController,
                     onSearchPressed: () {
-                      print( 'البحث من: ${_fromDateController.text} إلى ${_toDateController.text}', );
+                      final valid = SearchHelper.validateDates(
+                        context: context,
+                        from: _fromDateController.text,
+                        to: _toDateController.text,
+                      );
+
+                      setState(() {
+                        _showResults = valid;
+                      });
                     },
                   ),
+
                   const SizedBox(height: 20),
-              
-                  RevenueTypeSwitch(
-                    showRevenuePercentage: _showRevenuePercentage,
-                    onChanged: (value) {
-                      setState(() {_showRevenuePercentage = value; });
-                    },
-                  ),
-              
-                  const SizedBox(height: 20),
-              
-                  if (_showRevenuePercentage)
-                    RevenueBarChart(                      ContainerRevenueDetailsText: 'جدول الايرادات والحركات الشهرية',
-                       SearchFieldHintText: 'بحث في جدول الايرادات والحركات الشهرية',)
+
+                  if (_showResults) ...[
+                    RevenueTypeSwitch(
+                      showRevenuePercentage: _showRevenuePercentage,
+                      onChanged: (value) {
+                        setState(() {
+                          _showRevenuePercentage = value;
+                        });
+                      },
+                    ),
+                    const SizedBox(height: 20),
+
+                    _showRevenuePercentage
+                        ? RevenueBarChart(
+                            ContainerRevenueDetailsText: 'جدول الايرادات والحركات الشهرية',
+                            SearchFieldHintText: 'بحث في جدول الايرادات والحركات الشهرية',
+                          )
+                        : RevenuePieChartPercentaage(
+                            ContainerRevenueDetailsText: 'جدول الايرادات والحركات الشهرية',
+                            SearchFieldHintText: 'بحث في جدول الايرادات والحركات الشهرية',
+                          ),
+
+                    const SizedBox(height: 20),
+                    const TotalRevenueInAuthoritiesCard(),
+                    const SizedBox(height: 20),
+                  ]
+
                   else
-                    RevenuePieChartPercentaage(
-                      ContainerRevenueDetailsText: 'جدول الايرادات والحركات الشهرية',
-                       SearchFieldHintText: 'بحث في جدول الايرادات والحركات الشهرية',),
-              
-                  const SizedBox(height: 20),
-              
-                  // Total Revenue in Authorities Section
-                  const TotalRevenueInAuthoritiesCard(),
-              
-                  const SizedBox(height: 20),
+                   Showemptywidget()
                 ],
               ),
             ),
