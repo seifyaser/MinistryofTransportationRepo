@@ -33,9 +33,7 @@ class _MonthlyRevenueScreenState extends State<MonthlyRevenueScreen> {
                     fromDateController: _fromDateController,
                     toDateController: _toDateController,
                     onSearchPressed: () {
-                      print(
-                        'البحث من: ${_fromDateController.text} إلى ${_toDateController.text}',
-                      );
+                      print( 'البحث من: ${_fromDateController.text} إلى ${_toDateController.text}', );
                     },
                   ),
                   const SizedBox(height: 20),
@@ -50,9 +48,12 @@ class _MonthlyRevenueScreenState extends State<MonthlyRevenueScreen> {
                   const SizedBox(height: 20),
               
                   if (_showRevenuePercentage)
-                    RevenueBarChart()
+                    RevenueBarChart(                      ContainerRevenueDetailsText: 'جدول الايرادات والحركات الشهرية',
+                       SearchFieldHintText: 'بحث في جدول الايرادات والحركات الشهرية',)
                   else
-                    RevenuePieChartPercentaage(),
+                    RevenuePieChartPercentaage(
+                      ContainerRevenueDetailsText: 'جدول الايرادات والحركات الشهرية',
+                       SearchFieldHintText: 'بحث في جدول الايرادات والحركات الشهرية',),
               
                   const SizedBox(height: 20),
               

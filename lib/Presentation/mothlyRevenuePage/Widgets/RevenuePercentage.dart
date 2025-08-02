@@ -3,7 +3,9 @@ import 'package:project/Presentation/mothlyRevenuePage/Widgets/PieChart.dart';
 import 'package:project/Widgets/RevenueDeatailsContainer.dart';
 
 class RevenuePieChartPercentaage extends StatelessWidget {
-  const RevenuePieChartPercentaage({super.key});
+  const RevenuePieChartPercentaage({super.key, required this.ContainerRevenueDetailsText, required this.SearchFieldHintText});
+  final String ContainerRevenueDetailsText;
+  final String SearchFieldHintText ;
 
   @override
   Widget build(BuildContext context) {
@@ -18,9 +20,9 @@ class RevenuePieChartPercentaage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              TitleConatinerRevenue(title: 'جدول الايرادات والحركات الشهرية',),
+              TitleConatinerRevenue(title: ContainerRevenueDetailsText,),
               const SizedBox(height: 20),
-           Searchfield(text: 'بحث في جدول الايرادات والحركات الشهرية',),
+           Searchfield(text: SearchFieldHintText,),
               const SizedBox(height: 15),
               _buildRows(),
             ],

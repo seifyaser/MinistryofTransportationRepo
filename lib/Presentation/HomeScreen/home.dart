@@ -23,7 +23,9 @@ class HomeScreen extends StatelessWidget {
                     Buildsubcard(text:"الايراد و حركة النشاط الشهرية", onTap: () {
                       Navigator.pushNamed(context, '/monthlyrevenue');
                     }),
-                    Buildsubcard(text:" الايراد و حركة النشاط اليومية", onTap: () {}),
+                    Buildsubcard(text:" الايراد و حركة النشاط اليومية", onTap: () {
+                      Navigator.pushNamed(context, '/dailyrevenue');
+                    }),
                   ],
                 ),
 
