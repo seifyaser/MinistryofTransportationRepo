@@ -49,6 +49,7 @@ class _MonthlyRevenueScreenState extends State<MonthlyRevenueScreen> {
 
                   const SizedBox(height: 20),
 
+   // ... spread operator
                   if (_showResults) ...[
                     RevenueTypeSwitch(
                       showRevenuePercentage: _showRevenuePercentage,

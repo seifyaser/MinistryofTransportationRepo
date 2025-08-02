@@ -41,8 +41,8 @@ class CustomDateField extends StatelessWidget {
         DateTime? pickedDate = await showDatePicker(
           context: context,
           initialDate: DateTime.now(),
-          firstDate: DateTime(2000),
-          lastDate: DateTime(2101),
+          firstDate: DateTime(2020),
+          lastDate: DateTime(2030),
         );
         if (pickedDate != null) {
           controller.text = "${pickedDate.year}-${pickedDate.month}-${pickedDate.day}";

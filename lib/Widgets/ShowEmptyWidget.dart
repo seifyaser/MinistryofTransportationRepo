@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class Showemptywidget extends StatelessWidget {
   const Showemptywidget({super.key});
@@ -7,13 +8,13 @@ class Showemptywidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return  Column(
                       children: [
-                        SizedBox(height: 150),
-                        Icon(Icons.bar_chart, size: 50, color: Colors.grey[300]),
-                        SizedBox(height: 10),
-                        Text(
-                          "أضف فترة زمنية في محرك البحث",
-                          style: TextStyle(color: Colors.grey),
-                        ),
+                      //  SizedBox(height: 150),
+                      Image.asset('assets/EmptyForVisiblty.png',
+                      height: 190,
+                      ),
+                       Image.asset('assets/EmptyForVisibilty2.png',
+                      height: 380,
+                      ),
                       ],
                     );
   }

@@ -8,7 +8,6 @@ class SearchHelper {
   }) {
     if (from.isEmpty || to.isEmpty) {
       ScaffoldMessenger.of(context)
-        ..removeCurrentSnackBar()
         ..showSnackBar(SnackBar(
           content: Text('من فضلك اختر التاريخ من وإلى قبل البحث'),
           backgroundColor: Colors.red,
