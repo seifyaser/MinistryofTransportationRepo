@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:project/Presentation/HomeScreen/home.dart';
 import 'package:project/routes/app_routes.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
 }
 
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'FFShamelFamily',
       ),
       debugShowCheckedModeBanner: false, 
-      initialRoute: "/home",
+      initialRoute: "/login",
       routes: AppRoutes.routes,
     );
   }

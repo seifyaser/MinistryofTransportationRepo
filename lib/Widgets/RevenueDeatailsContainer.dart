@@ -55,47 +55,53 @@ class DetailsRow extends StatelessWidget {
   final String label;
   final String? value;
   final bool isHeader;
+  final TextAlign align;
+    final Color? valueColor; 
 
   const DetailsRow({
     Key? key,
     required this.label,
     this.value,
     this.isHeader = false,
+    this.align = TextAlign.right, this.valueColor, 
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: Column(
+        crossAxisAlignment: align == TextAlign.left
+            ? CrossAxisAlignment.start
+            : CrossAxisAlignment.end,
         children: [
           Text(
-            value ?? '',
+            label,
+            textAlign: align,
+            textDirection: TextDirection.rtl,
             style: TextStyle(
               fontSize: isHeader ? 14 : 13,
-              color: isHeader ? Colors.black : Colors.grey[700],
+    color: valueColor ?? Colors.grey[800], 
               fontWeight: isHeader ? FontWeight.bold : FontWeight.normal,
             ),
-            textDirection: TextDirection.rtl,
           ),
-          Expanded(
-            child: Text(
-              label,
-              textAlign: TextAlign.right,
+          if (value != null)
+            Text(
+              value!,
+              textAlign: align,
               textDirection: TextDirection.rtl,
               style: TextStyle(
-                fontSize: isHeader ? 14 : 13,
-                color: isHeader ? Colors.black : Colors.grey[700],
-                fontWeight: isHeader ? FontWeight.bold : FontWeight.normal,
+                fontSize: 13,
+                
+    color: valueColor ?? Colors.grey[800],              fontWeight: FontWeight.w500,
               ),
             ),
-          ),
         ],
       ),
     );
   }
 }
+
 
 // === cONTAINER STYLE ===
   BoxDecoration boxDecoration() {

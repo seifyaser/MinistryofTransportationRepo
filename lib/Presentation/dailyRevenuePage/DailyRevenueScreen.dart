@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:project/Presentation/mothlyRevenuePage/Widgets/RevenueTable.dart';
+import 'package:project/Presentation/mothlyRevenuePage/Widgets/comparePeriodTab.dart';
 import 'package:project/Widgets/CustomHeader.dart';
 import 'package:project/Widgets/RevenueDateSearch.dart';
-import 'package:project/Presentation/mothlyRevenuePage/Widgets/RevenuePercentage.dart';
+import 'package:project/Presentation/mothlyRevenuePage/Widgets/RevenueDetailsTab.dart';
 import 'package:project/Presentation/mothlyRevenuePage/Widgets/RevenueTypeSwitch.dart';
 import 'package:project/Presentation/mothlyRevenuePage/Widgets/TotalRevenueAuthoritiesCard.dart';
 import 'package:project/Widgets/ShowEmptyWidget.dart';
@@ -60,11 +60,11 @@ class _DailyRevenueScreenState extends State<DailyRevenueScreen> {
                     const SizedBox(height: 20),
 
                     _showRevenuePercentage
-                        ? RevenueBarChart(
+                        ? ComparePeriodTab(
                             ContainerRevenueDetailsText: 'جدول الايرادات والحركات اليومية',
                             SearchFieldHintText: 'بحث في جدول الايرادات والحركات اليومية',
                           )
-                        : RevenuePieChartPercentaage(
+                        : RevenuePieDetailsTab(
                             ContainerRevenueDetailsText: 'جدول الايرادات والحركات اليومية',
                             SearchFieldHintText: 'بحث في جدول الايرادات والحركات اليومية',
                           ),

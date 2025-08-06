@@ -35,7 +35,7 @@ class RevenueTypeSwitch extends StatelessWidget {
                 elevation: showRevenuePercentage ? 0 : 2,
               ),
               icon: const Icon(Icons.pie_chart),
-              label: const Text("نسبة الإيرادات", style: TextStyle(fontSize: 14)),
+              label: const Text("مقارنة المدة", style: TextStyle(fontSize: 14)),
             ),
           ),
 
@@ -59,7 +59,7 @@ class RevenueTypeSwitch extends StatelessWidget {
                 elevation: showRevenuePercentage ? 2 : 0,
               ),
               icon: const Icon(Icons.insert_chart),
-              label: const Text("جدول الإيرادات", style: TextStyle(fontSize: 14)),
+              label: const Text("تفاصيل الايرادات", style: TextStyle(fontSize: 14)),
             ),
           ),
         ],
