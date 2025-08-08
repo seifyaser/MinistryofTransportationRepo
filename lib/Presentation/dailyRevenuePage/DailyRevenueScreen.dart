@@ -69,9 +69,7 @@ class _DailyRevenueScreenState extends State<DailyRevenueScreen> {
                             SearchFieldHintText: 'بحث في جدول الايرادات والحركات اليومية',
                           ),
 
-                    const SizedBox(height: 20),
-                    const TotalRevenueInAuthoritiesCard(),
-                    const SizedBox(height: 20),
+
                   ]
                   else
                     Showemptywidget(),

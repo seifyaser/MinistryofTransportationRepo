@@ -4,7 +4,6 @@ import 'package:project/Widgets/CustomHeader.dart';
 import 'package:project/Widgets/RevenueDateSearch.dart';
 import 'package:project/Presentation/mothlyRevenuePage/Widgets/RevenueDetailsTab.dart';
 import 'package:project/Presentation/mothlyRevenuePage/Widgets/RevenueTypeSwitch.dart';
-import 'package:project/Presentation/mothlyRevenuePage/Widgets/TotalRevenueAuthoritiesCard.dart';
 import 'package:project/Widgets/ShowEmptyWidget.dart';
 import 'package:project/utils/visibilityHelper.dart';
 
@@ -62,17 +61,16 @@ class _MonthlyRevenueScreenState extends State<MonthlyRevenueScreen> {
                     const SizedBox(height: 20),
 
                     _showRevenuePercentage
-                        ?RevenuePieDetailsTab ( // مقارن ة المدة
+                        ?RevenuePieDetailsTab ( // م تفاصيل الايرادات
                             ContainerRevenueDetailsText: 'جدول الايرادات والحركات الشهرية',
                             SearchFieldHintText: 'بحث في جدول الايرادات والحركات الشهرية',
                           )
-                        : ComparePeriodTab ( // تفاصيل الايرادات
+                        : ComparePeriodTab ( //قارن مة المدة //
                             ContainerRevenueDetailsText: 'جدول الايرادات والحركات الشهرية',
                             SearchFieldHintText: 'بحث في جدول الايرادات والحركات الشهرية',
                           ),
 
-                    const SizedBox(height: 20),
-                    const TotalRevenueInAuthoritiesCard(),
+
                     const SizedBox(height: 20),
                   ]
 

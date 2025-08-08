@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:project/Presentation/mothlyRevenuePage/Widgets/PieChart.dart';
+import 'package:project/Widgets/RowsRevenueTabDetails.dart';
 import 'package:project/Widgets/RevenueDeatailsContainer.dart';
+import 'package:project/Widgets/TOTALRevenue_RevenueTabDetails.dart';
 
 class RevenuePieDetailsTab extends StatelessWidget {
   const RevenuePieDetailsTab({super.key, required this.ContainerRevenueDetailsText, required this.SearchFieldHintText});
@@ -35,81 +37,21 @@ Widget build(BuildContext context) {
         borderRadius: BorderRadius.circular(10),
         border: Border.all(color: Colors.grey.shade400),
       ),
-      child: _buildRowsRevenueTab(),
+      child: RowsrevenueTabdetails(),
     ),
   ),
 ),
-
           ],
         ),
       ),
+      TotalRevenueTabDetailsContainer()
+
     ],
+    
   );
 }
 
 
-Widget _buildRowsRevenueTab() {
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.end,
-    children: [
-      const DetailsRow(
-        label: 'اسم الجهة',
-        isHeader: true,
-      ),
-      const DetailsRow(
-        label: 'الهيئة القومية لسكك الحديد',
-      ),
-      const SizedBox(height: 15),
-      const DetailsRow(
-        label: 'قيمة الايراد',
-        isHeader: true,
-      ),
-      Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Flexible(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
-                DetailsRow(
-                  label: 'الفترة المقابلة عام سابق',
-                  value: '460,254,853',
-                ),
-                DetailsRow(
-                  label: 'الفرق',
-                  value: '202,357,547',
-                  valueColor: Colors.red,
-                ),
-              ],
-            ),
-          ),
-          Container(
-            width: 1,
-            height: 80,
-            color: Colors.grey.shade400,
-            margin: const EdgeInsets.symmetric(horizontal: 12),
-          ),
-          Flexible(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: const [
-                DetailsRow(
-                  label: 'الفترة المحددة',
-                  value: '662,612,400',
-                ),
-                DetailsRow(
-                  label: 'نسبة التغير',
-                  value: '33%',
-                  valueColor: Colors.red,
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    ],
-  );
-}
 
 }
 
