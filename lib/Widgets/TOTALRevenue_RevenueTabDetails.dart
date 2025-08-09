@@ -26,10 +26,7 @@ class TotalRevenueTabDetailsContainer extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            const DetailsRow(
-              label: 'اجمالي ايراد الجهاز',
-              isHeader: true,
-            ),
+           TitleConatinerRevenue(title: 'اجمالي ايراد الجهاز'),
             const SizedBox(height: 8),
       
             Row(

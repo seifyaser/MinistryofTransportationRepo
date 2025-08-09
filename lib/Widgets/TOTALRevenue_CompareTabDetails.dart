@@ -27,13 +27,10 @@ class TOTALRevenueCompareTabDetailsContainer extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
            // const SizedBox(height: 12),
-            const DetailsRow(
-              label: 'اجمالي ايراد الجهاز',
-              isHeader: true,
-            ),
+                     TitleConatinerRevenue(title: 'اجمالي ايراد الجهاز'),
+
             const SizedBox(height: 6),
       
-            // الصف الأول
             Row(
               children: const [
                 Expanded(

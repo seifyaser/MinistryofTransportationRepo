@@ -6,6 +6,7 @@ import 'package:project/Presentation/mothlyRevenuePage/Widgets/RevenueDetailsTab
 import 'package:project/Presentation/mothlyRevenuePage/Widgets/RevenueTypeSwitch.dart';
 import 'package:project/Widgets/ShowEmptyWidget.dart';
 import 'package:project/utils/visibilityHelper.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MonthlyRevenueScreen extends StatefulWidget {
   @override
@@ -17,6 +18,13 @@ class _MonthlyRevenueScreenState extends State<MonthlyRevenueScreen> {
   final TextEditingController _toDateController = TextEditingController();
   bool _showResults = false;
   bool _showRevenuePercentage = true;
+   String _userId = '';
+
+  @override
+
+
+ 
+
 
   @override
   Widget build(BuildContext context) {
@@ -66,8 +74,10 @@ class _MonthlyRevenueScreenState extends State<MonthlyRevenueScreen> {
                             SearchFieldHintText: 'بحث في جدول الايرادات والحركات الشهرية',
                           )
                         : ComparePeriodTab ( //قارن مة المدة //
-                            ContainerRevenueDetailsText: 'جدول الايرادات والحركات الشهرية',
-                            SearchFieldHintText: 'بحث في جدول الايرادات والحركات الشهرية',
+                            containerRevenueDetailsText: 'جدول الايرادات والحركات الشهرية',
+                            searchFieldHintText: 'بحث في جدول الايرادات والحركات الشهرية',
+                             fromDate: _fromDateController.text,
+                              toDate: _toDateController.text,
                           ),
 
 

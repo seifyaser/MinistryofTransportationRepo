@@ -61,8 +61,10 @@ class _DailyRevenueScreenState extends State<DailyRevenueScreen> {
 
                     _showRevenuePercentage
                         ? ComparePeriodTab(
-                            ContainerRevenueDetailsText: 'جدول الايرادات والحركات اليومية',
-                            SearchFieldHintText: 'بحث في جدول الايرادات والحركات اليومية',
+                            containerRevenueDetailsText: 'جدول الايرادات والحركات اليومية',
+                            searchFieldHintText: 'بحث في جدول الايرادات والحركات اليومية',
+                             fromDate: _fromDateController.text,
+                              toDate: _toDateController.text,
                           )
                         : RevenuePieDetailsTab(
                             ContainerRevenueDetailsText: 'جدول الايرادات والحركات اليومية',
