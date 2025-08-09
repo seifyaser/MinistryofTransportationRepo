@@ -52,7 +52,7 @@ class _ComparePeriodTabState extends State<ComparePeriodTab> {
                 TitleConatinerRevenue(title: widget.containerRevenueDetailsText),
                 const SizedBox(height: 20),
 
-                // حقل البحث
+              
                 Searchfield(
                   text: widget.searchFieldHintText,
                   controller: _searchController,
@@ -80,6 +80,15 @@ class _ComparePeriodTabState extends State<ComparePeriodTab> {
                                 e.currEntityName.contains(_searchText) || // عدل حسب الحقل اللي عايز تبحث فيه
                                 e.currEntityName.toLowerCase().contains(_searchText.toLowerCase()))
                             .toList();
+
+                             if (entities.isEmpty) {
+                            return const Center(
+                              child: Text(
+                            '!!مفيش بيانات من التاريخ ده',
+                              style: TextStyle(color: Colors.red),
+                                 ),
+                                      );
+                                           }
 
                         return ListView.separated(
                           itemCount: entities.length,

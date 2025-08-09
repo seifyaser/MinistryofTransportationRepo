@@ -37,7 +37,7 @@ class Searchfield extends StatelessWidget {
     return TextField(
       controller: controller,
       textAlign: TextAlign.right,
-      onChanged: onChanged, // بينده لما المستخدم يكتب
+      onChanged: onChanged,
       decoration: InputDecoration(
         hintStyle: const TextStyle(
           fontSize: 11,

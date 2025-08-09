@@ -6,8 +6,6 @@ import 'package:project/Presentation/mothlyRevenuePage/Widgets/RevenueDetailsTab
 import 'package:project/Presentation/mothlyRevenuePage/Widgets/RevenueTypeSwitch.dart';
 import 'package:project/Widgets/ShowEmptyWidget.dart';
 import 'package:project/utils/visibilityHelper.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
 class MonthlyRevenueScreen extends StatefulWidget {
   @override
   _MonthlyRevenueScreenState createState() => _MonthlyRevenueScreenState();
@@ -18,13 +16,6 @@ class _MonthlyRevenueScreenState extends State<MonthlyRevenueScreen> {
   final TextEditingController _toDateController = TextEditingController();
   bool _showResults = false;
   bool _showRevenuePercentage = true;
-   String _userId = '';
-
-  @override
-
-
- 
-
 
   @override
   Widget build(BuildContext context) {
