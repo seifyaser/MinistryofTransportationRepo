@@ -21,15 +21,25 @@ class TitleConatinerRevenue extends StatelessWidget {
 
 /// === Search Field Widget ===
 class Searchfield extends StatelessWidget {
-  const Searchfield({super.key, required this.text});
   final String text;
+  final TextEditingController controller;
+  final ValueChanged<String>? onChanged;
+
+  const Searchfield({
+    super.key,
+    required this.text,
+    required this.controller,
+    this.onChanged,
+  });
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      controller: controller,
       textAlign: TextAlign.right,
+      onChanged: onChanged, // بينده لما المستخدم يكتب
       decoration: InputDecoration(
-        hintStyle: TextStyle(
+        hintStyle: const TextStyle(
           fontSize: 11,
         ),
         hintText: text,
@@ -49,6 +59,7 @@ class Searchfield extends StatelessWidget {
     );
   }
 }
+
 
 /// === Details Row Widget ===
 class DetailsRow extends StatelessWidget {
