@@ -1,8 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:project/Widgets/RevenueDeatailsContainer.dart';
 
+import 'package:flutter/material.dart';
+
 class TOTALRevenueCompareTabDetailsContainer extends StatelessWidget {
-  const TOTALRevenueCompareTabDetailsContainer({super.key});
+  final String periodIncome;
+  final String prevPeriodIncome;
+  final String changePercent;
+  final String difference;
+
+  const TOTALRevenueCompareTabDetailsContainer({
+    super.key,
+    required this.periodIncome,
+    required this.prevPeriodIncome,
+    required this.changePercent,
+    required this.difference,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -12,8 +25,8 @@ class TOTALRevenueCompareTabDetailsContainer extends StatelessWidget {
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
           color: const Color.fromARGB(86, 66, 78, 134),
-          borderRadius: BorderRadius.circular(8), 
-          border: Border.all(color: Colors.grey.shade300), 
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(color: Colors.grey.shade300),
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.1),
@@ -26,47 +39,42 @@ class TOTALRevenueCompareTabDetailsContainer extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-           // const SizedBox(height: 12),
-                     TitleConatinerRevenue(title: 'اجمالي ايراد الجهاز'),
-
+            TitleConatinerRevenue(title: 'اجمالي ايراد الجهاز'),
             const SizedBox(height: 6),
-      
             Row(
-              children: const [
+              children: [
                 Expanded(
                   child: DetailsRow(
                     label: 'الفترة المحددة',
-                    value: '662,612,400',
+                    value: periodIncome,
                     valueColor: Colors.green,
                   ),
                 ),
-                SizedBox(width: 12),
+                const SizedBox(width: 12),
                 Expanded(
                   child: DetailsRow(
                     label: 'الفترة المقابلة عام سابق',
-                    value: '460,254,853',
+                    value: prevPeriodIncome,
                     valueColor: Colors.green,
                   ),
                 ),
               ],
             ),
             const SizedBox(height: 6),
-      
-            // الصف الثاني
             Row(
-              children: const [
+              children: [
                 Expanded(
                   child: DetailsRow(
                     label: 'نسبة التغير',
-                    value: '33%',
+                    value: changePercent,
                     valueColor: Colors.red,
                   ),
                 ),
-                SizedBox(width: 12),
+                const SizedBox(width: 12),
                 Expanded(
                   child: DetailsRow(
                     label: 'الفرق',
-                    value: '202,357,547',
+                    value: difference,
                     valueColor: Colors.red,
                   ),
                 ),

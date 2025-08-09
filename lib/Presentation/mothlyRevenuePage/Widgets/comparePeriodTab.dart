@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart'; 
 import 'package:project/Core/specific_entity_income/specific_entity_income_cubit.dart';
 import 'package:project/Core/specific_entity_income/specific_entity_income_state.dart';
 import 'package:project/Presentation/mothlyRevenuePage/Widgets/BarChart.dart';
@@ -51,8 +52,6 @@ class _ComparePeriodTabState extends State<ComparePeriodTab> {
               children: [
                 TitleConatinerRevenue(title: widget.containerRevenueDetailsText),
                 const SizedBox(height: 20),
-
-              
                 Searchfield(
                   text: widget.searchFieldHintText,
                   controller: _searchController,
@@ -62,9 +61,7 @@ class _ComparePeriodTabState extends State<ComparePeriodTab> {
                     });
                   },
                 ),
-
                 const SizedBox(height: 15),
-
                 SizedBox(
                   height: 400,
                   child: BlocBuilder<SpecificEntityCubit, SpecificEntityIncomeState>(
@@ -72,23 +69,22 @@ class _ComparePeriodTabState extends State<ComparePeriodTab> {
                       if (state is SpecificEntityIncomeLoading) {
                         return const Center(child: CircularProgressIndicator());
                       } else if (state is SpecificEntityIncomeError) {
-                        return Center(child: Text(state.message));
+                        return Center(child: Text(state.message, style: const TextStyle(color: Colors.red)));
                       } else if (state is SpecificEntityIncomeLoaded) {
-                        // فلترة حسب البحث
                         final entities = state.comparePeriodModel.data
                             .where((e) =>
-                                e.currEntityName.contains(_searchText) || // عدل حسب الحقل اللي عايز تبحث فيه
+                                e.currEntityName.contains(_searchText) ||
                                 e.currEntityName.toLowerCase().contains(_searchText.toLowerCase()))
                             .toList();
 
-                             if (entities.isEmpty) {
-                            return const Center(
-                              child: Text(
-                            '!!مفيش بيانات من التاريخ ده',
+                        if (entities.isEmpty) {
+                          return const Center(
+                            child: Text(
+                              '!!مفيش بيانات من التاريخ ده',
                               style: TextStyle(color: Colors.red),
-                                 ),
-                                      );
-                                           }
+                            ),
+                          );
+                        }
 
                         return ListView.separated(
                           itemCount: entities.length,
@@ -113,7 +109,42 @@ class _ComparePeriodTabState extends State<ComparePeriodTab> {
               ],
             ),
           ),
-          const TOTALRevenueCompareTabDetailsContainer(),
+
+          BlocBuilder<SpecificEntityCubit, SpecificEntityIncomeState>(
+            builder: (context, state) {
+              if (state is SpecificEntityIncomeLoaded) {
+                final filteredEntities = state.comparePeriodModel.data
+                    .where((e) =>
+                        e.currEntityName.toLowerCase().contains(_searchText.toLowerCase()) ||
+                        e.currEntityName.contains(_searchText))
+                    .toList();
+
+                // حساب الإجماليات
+                final double periodTotal = filteredEntities.fold(
+                    0, (sum, e) => sum + (e.currTotalEgpIncome ?? 0));
+                final double prevPeriodTotal = filteredEntities.fold(
+                    0, (sum, e) => sum + (e.prevTotalEgpIncome ?? 0));
+                final double diff = periodTotal - prevPeriodTotal;
+                final String changePercent = prevPeriodTotal == 0
+                    ? '0%'
+                    : '${((diff / prevPeriodTotal) * 100).toStringAsFixed(2)}%';
+
+                // تنسيق الأرقام مع الفواصل
+                final formatter = NumberFormat('#,###');
+                final formattedPeriodTotal = formatter.format(periodTotal);
+                final formattedPrevPeriodTotal = formatter.format(prevPeriodTotal);
+                final formattedDiff = formatter.format(diff.abs());
+
+                return TOTALRevenueCompareTabDetailsContainer(
+                  periodIncome: formattedPeriodTotal,
+                  prevPeriodIncome: formattedPrevPeriodTotal,
+                  changePercent: changePercent,
+                  difference: diff >= 0 ? formattedDiff : '-$formattedDiff',
+                );
+              }
+              return const SizedBox.shrink();
+            },
+          ),
         ],
       ),
     );

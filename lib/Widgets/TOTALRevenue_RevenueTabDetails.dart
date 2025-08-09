@@ -1,15 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:project/Widgets/RevenueDeatailsContainer.dart';
 
 class TotalRevenueTabDetailsContainer extends StatelessWidget {
-  const TotalRevenueTabDetailsContainer({super.key});
+  final double euroIncome;
+  final double usdIncome;
+  final double egpIncome;
+  final double totalEgpIncome;
+
+  const TotalRevenueTabDetailsContainer({
+    super.key,
+    required this.euroIncome,
+    required this.usdIncome,
+    required this.egpIncome,
+    required this.totalEgpIncome,
+  });
 
   @override
   Widget build(BuildContext context) {
+    final formatter = NumberFormat('#,###');
+
     return Padding(
       padding: const EdgeInsets.all(20),
       child: Container(
-        padding: const EdgeInsets.all(12), 
+        padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
           color: const Color.fromARGB(86, 66, 78, 134),
           borderRadius: BorderRadius.circular(8),
@@ -26,46 +40,44 @@ class TotalRevenueTabDetailsContainer extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-           TitleConatinerRevenue(title: 'اجمالي ايراد الجهاز'),
+            TitleConatinerRevenue(title: 'اجمالي ايراد الجهاز'),
             const SizedBox(height: 8),
-      
+
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: const [
+              children: [
                 Flexible(
                   child: DetailsRow(
                     label: 'الإيراد باليورو',
-                    value: '7,165',
-                    valueColor: Color(0xFF38628B),
+                    value: formatter.format(euroIncome),
+                    valueColor: const Color(0xFF38628B),
                   ),
                 ),
                 Flexible(
                   child: DetailsRow(
                     label: 'الإيراد بالدولار',
-                    value: '163,456',
-                    valueColor: Color(0xFF38628B),
+                    value: formatter.format(usdIncome),
+                    valueColor: const Color(0xFF38628B),
                   ),
                 ),
                 Flexible(
                   child: DetailsRow(
                     label: 'الإيراد بالجنيه',
-                    value: '607,156,987',
-                    valueColor: Color(0xFF38628B),
+                    value: formatter.format(egpIncome),
+                    valueColor: const Color(0xFF38628B),
                   ),
                 ),
               ],
             ),
-      
 
-      
             Padding(
               padding: const EdgeInsets.only(top: 8),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
-                children: const [
+                children: [
                   DetailsRow(
                     label: 'إجمالي الإيراد بالجنيه',
-                    value: '607,327,608',
+                    value: formatter.format(totalEgpIncome),
                     valueColor: Colors.red,
                   ),
                 ],

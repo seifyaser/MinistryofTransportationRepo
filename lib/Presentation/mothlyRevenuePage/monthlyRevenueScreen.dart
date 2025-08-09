@@ -61,8 +61,8 @@ class _MonthlyRevenueScreenState extends State<MonthlyRevenueScreen> {
 
                     _showRevenuePercentage
                         ?RevenuePieDetailsTab ( // م تفاصيل الايرادات
-                            ContainerRevenueDetailsText: 'جدول الايرادات والحركات الشهرية',
-                            SearchFieldHintText: 'بحث في جدول الايرادات والحركات الشهرية',
+                            containerRevenueDetailsText: 'جدول الايرادات والحركات الشهرية',
+                            searchFieldHintText: 'بحث في جدول الايرادات والحركات الشهرية', fromDate: _fromDateController.text, toDate: _toDateController.text,
                           )
                         : ComparePeriodTab ( //قارن مة المدة //
                             containerRevenueDetailsText: 'جدول الايرادات والحركات الشهرية',

@@ -4,7 +4,6 @@ import 'package:project/Widgets/CustomHeader.dart';
 import 'package:project/Widgets/RevenueDateSearch.dart';
 import 'package:project/Presentation/mothlyRevenuePage/Widgets/RevenueDetailsTab.dart';
 import 'package:project/Presentation/mothlyRevenuePage/Widgets/RevenueTypeSwitch.dart';
-import 'package:project/Presentation/mothlyRevenuePage/Widgets/TotalRevenueAuthoritiesCard.dart';
 import 'package:project/Widgets/ShowEmptyWidget.dart';
 import 'package:project/utils/visibilityHelper.dart';
 
@@ -67,8 +66,8 @@ class _DailyRevenueScreenState extends State<DailyRevenueScreen> {
                               toDate: _toDateController.text,
                           )
                         : RevenuePieDetailsTab(
-                            ContainerRevenueDetailsText: 'جدول الايرادات والحركات اليومية',
-                            SearchFieldHintText: 'بحث في جدول الايرادات والحركات اليومية',
+                            containerRevenueDetailsText: 'جدول الايرادات والحركات اليومية',
+                            searchFieldHintText: 'بحث في جدول الايرادات والحركات اليومية', fromDate: _fromDateController.text, toDate: _toDateController.text,
                           ),
 
 
