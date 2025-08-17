@@ -1,6 +1,9 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:project/Presentation/ReportsPage/DailyReportsPage/Widgets/CustomDailyDatePickerField.dart';
-import 'package:project/Widgets/CustomHeader.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:project/Core/cubits/Reports_CUBIT/reports_cubit.dart';
+import 'package:project/Presentation/ReportsPage/MonthlyReportsPage/CustomMonthPidkcer.dart';
+import 'package:project/Presentation/ReportsPage/baseReportsScreen.dart';
 
 class MonthlyReportsScreen extends StatefulWidget {
   const MonthlyReportsScreen({super.key});
@@ -10,44 +13,26 @@ class MonthlyReportsScreen extends StatefulWidget {
 }
 
 class _MonthlyReportsScreenState extends State<MonthlyReportsScreen> {
-    DateTime? fromDate;
-  DateTime? toDate;
-
+  String? selectedMonth;
 
   @override
   Widget build(BuildContext context) {
-    final bool hasReports = false;
-
-    return Scaffold(
-      body: Column(
-        children: [
-          CustomHeader(title: 'النشرات والتقارير الشهرية'),
-          Padding(
-            padding: const EdgeInsets.all(12),
-            child: CustomDailyDatePickerField(
-                    selectedDate: fromDate,
-                onDateSelected: (date) {
-                setState(() {
-                  fromDate = date;
-                  toDate = date;  // نفس التاريخ
-                });
-              },
-            ),
-          ),
-          const SizedBox(height: 40),
-          Expanded(
-            child: Center(
-              child: Text(
-                hasReports ? 'تقارير ستظهر هنا' : 'لا تقارير لعرضها',
-                style: TextStyle(
-                  color: Colors.grey.shade600,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          )
-        ],
+    return BlocProvider(
+      create: (_) => ReportsCubit(Dio()),
+      child: BaseReportsScreen(
+        title: 'النشرات والتقارير الشهرية',
+        statementStatus: '2',
+        buildDatePicker: (fromDate, toDate, onDateChanged) {
+          return CustomMonthPickerField(
+            selectedMonth: selectedMonth,
+            onMonthSelected: (monthLabel, from, to) {
+              setState(() {
+                selectedMonth = monthLabel;
+              });
+              onDateChanged(from, to); // نرجع التواريخ للـ BaseReportsScreen
+            },
+          );
+        },
       ),
     );
   }
