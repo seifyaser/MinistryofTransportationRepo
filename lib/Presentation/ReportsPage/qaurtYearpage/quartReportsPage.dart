@@ -5,8 +5,15 @@ import 'package:project/Core/cubits/Reports_CUBIT/reports_cubit.dart';
 import 'package:project/Presentation/ReportsPage/baseReportsScreen.dart';
 import 'package:project/Presentation/ReportsPage/qaurtYearpage/QuarterYearDatepicker.dart';
 
-class QuartYearReportsScreen extends StatelessWidget {
+class QuartYearReportsScreen extends StatefulWidget {
   const QuartYearReportsScreen({super.key});
+
+  @override
+  State<QuartYearReportsScreen> createState() => _QuartYearReportsScreenState();
+}
+
+class _QuartYearReportsScreenState extends State<QuartYearReportsScreen> {
+  String? selectedQuarter;
 
   @override
   Widget build(BuildContext context) {
@@ -16,8 +23,15 @@ class QuartYearReportsScreen extends StatelessWidget {
         title: 'النشرات والتقارير الربع سنوي',
         statementStatus: '4',
         buildDatePicker: (fromDate, toDate, onDateChanged) {
-          return QuarterlyPickerButton();
-
+          return CustomQuarterlyPickerField(
+            selectedQuarter: selectedQuarter, 
+            onQuarterSelected: (quarter, from, to) {
+              setState(() {
+                selectedQuarter = quarter; 
+              });
+              onDateChanged(from, to);
+            },
+          );
         },
       ),
     );
