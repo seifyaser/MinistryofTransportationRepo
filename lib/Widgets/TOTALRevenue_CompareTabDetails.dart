@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:project/Widgets/RevenueDeatailsContainer.dart';
-
-import 'package:flutter/material.dart';
-
 class TOTALRevenueCompareTabDetailsContainer extends StatelessWidget {
   final String periodIncome;
   final String prevPeriodIncome;

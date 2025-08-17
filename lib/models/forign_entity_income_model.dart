@@ -13,16 +13,16 @@ class EntityIncome {
 
   EntityIncome({
     required this.currEntityName,
-    required this.currEgpIncome,
-    required this.currUsdIncome,
-    required this.currEuroIncome,
-    required this.currTotalEgpIncome,
-    required this.currEntityId,
-    required this.prevEgpIncome,
-    required this.prevUsdIncome,
-    required this.prevEuroIncome,
-    required this.prevTotalEgpIncome,
-    required this.diffTotalEgpIncome,
+    this.currEgpIncome,
+     this.currUsdIncome,
+   this.currEuroIncome,
+    this.currTotalEgpIncome,
+     required this.currEntityId,
+     this.prevEgpIncome,
+     this.prevUsdIncome,
+   this.prevEuroIncome,
+   this.prevTotalEgpIncome,
+     this.diffTotalEgpIncome,
   });
 
   factory EntityIncome.fromJson(Map<String, dynamic> json) {

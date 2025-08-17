@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project/Presentation/mothlyRevenuePage/Widgets/comparePeriodTab.dart';
 import 'package:project/Widgets/CustomHeader.dart';
-import 'package:project/Widgets/RevenueDateSearch.dart';
+import 'package:project/Presentation/mothlyRevenuePage/Widgets/RevenueDateSearch.dart';
 import 'package:project/Presentation/mothlyRevenuePage/Widgets/RevenueDetailsTab.dart';
 import 'package:project/Presentation/mothlyRevenuePage/Widgets/RevenueTypeSwitch.dart';
 import 'package:project/Widgets/ShowEmptyWidget.dart';
@@ -62,7 +62,9 @@ class _MonthlyRevenueScreenState extends State<MonthlyRevenueScreen> {
                     _showRevenuePercentage
                         ?RevenuePieDetailsTab ( // م تفاصيل الايرادات
                             containerRevenueDetailsText: 'جدول الايرادات والحركات الشهرية',
-                            searchFieldHintText: 'بحث في جدول الايرادات والحركات الشهرية', fromDate: _fromDateController.text, toDate: _toDateController.text,
+                            searchFieldHintText: 'بحث في جدول الايرادات والحركات الشهرية',
+                             fromDate: _fromDateController.text,
+                              toDate: _toDateController.text,
                           )
                         : ComparePeriodTab ( //قارن مة المدة //
                             containerRevenueDetailsText: 'جدول الايرادات والحركات الشهرية',

@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:project/Core/specific_entity_income/specific_entity_income_state.dart';
+import 'package:project/Core/cubits/specific_entity_income/specific_entity_income_state.dart';
 import 'package:project/models/SpeicficEnitiyModel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

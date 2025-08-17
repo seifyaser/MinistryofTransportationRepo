@@ -36,14 +36,35 @@ class HomeScreen extends StatelessWidget {
                   text: 'النشرات و التقارير',
                   subCards: [
                     Buildsubcard(
-                      text: 'النشرات و التقارير الشهرية',
+                      text: ' الشهرية',
                       onTap: () {
-                        
+                        Navigator.pushNamed(context, '/monthlyreport');
                       },
                     ),
                     Buildsubcard(
-                      text: 'النشرات و التقارير اليومية',
-                      onTap: () {},
+                      text: 'اليومية',
+                      onTap: () {
+                        Navigator.pushNamed(context, '/dailyreport');
+                      },
+                    ),
+                      Buildsubcard(
+                      text: 'ربع سنوية',
+                      onTap: () {
+                        Navigator.pushNamed(context, '/quartelyreport');
+                      },
+                    ),
+                  SizedBox(height: 1),
+                      Buildsubcard(
+                      text: 'نصف سنوية',
+                      onTap: () {
+                        Navigator.pushNamed(context, '/halfyearlyreport');
+                      },
+                    ),
+                     Buildsubcard(
+                      text: 'سنوية',
+                      onTap: () {
+                        Navigator.pushNamed(context, '/yearlyreport');
+                      },
                     ),
                   ],
                 ),

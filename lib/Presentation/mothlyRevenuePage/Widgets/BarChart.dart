@@ -1,8 +1,11 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:project/models/forign_entity_income_model.dart';
 
 class RevenueBarChartCard extends StatelessWidget {
-  const RevenueBarChartCard({super.key});
+  final List<EntityIncome> entities;
+
+  const RevenueBarChartCard({super.key, required this.entities});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +30,7 @@ class RevenueBarChartCard extends StatelessWidget {
             height: 250,
             child: BarChart(
               BarChartData(
-                maxY: 18,
+                maxY: _getMaxY(),
                 barGroups: _buildBarGroups(),
                 gridData: FlGridData(
                   show: true,
@@ -52,16 +55,28 @@ class RevenueBarChartCard extends StatelessWidget {
                   bottomTitles: AxisTitles(
                     sideTitles: SideTitles(
                       showTitles: true,
-                      getTitlesWidget: (value, meta) => const SizedBox.shrink(),
+                      getTitlesWidget: (value, meta) {
+                        if (value.toInt() < entities.length) {
+                          return Padding(
+                            padding: const EdgeInsets.only(top: 8.0),
+                            child: Text(
+                              entities[value.toInt()].currEntityName,
+                              style: const TextStyle(fontSize: 10),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          );
+                        }
+                        return const SizedBox.shrink();
+                      },
                     ),
                   ),
                   leftTitles: AxisTitles(
                     sideTitles: SideTitles(
                       showTitles: true,
                       reservedSize: 30,
-                      interval: 2,
+                      interval: (_getMaxY() / 5).roundToDouble(),
                       getTitlesWidget: (value, meta) {
-                        if (value % 2 == 0 && value >= 2 && value <= 18) {
+                        if (value >= 0) {
                           return Text(
                             value.toInt().toString(),
                             style: const TextStyle(
@@ -82,67 +97,35 @@ class RevenueBarChartCard extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 12),
-          _buildLegend(),
         ],
       ),
     );
   }
 
-  List<BarChartGroupData> _buildBarGroups() {
-    final data = [
-      {'label': 'خدمات عربات النوم', 'value': 10.39, 'color': Colors.yellow[600]},
-      {'label': 'خصم عربات النوم', 'value': 16.88, 'color': Colors.orange[600]},
-    ];
+  double _getMaxY() {
+    if (entities.isEmpty) return 0;
+    final maxIncome = entities
+        .map((e) => e.currTotalEgpIncome ?? 0)
+        .reduce((a, b) => a > b ? a : b);
+    return maxIncome * 1.2; // علشان يبقى فيه مساحة فوق العمود
+  }
 
-    return List.generate(data.length, (index) {
-      final item = data[index];
-      final double value = item['value'] as double;
-      final Color color = item['color'] as Color;
+  List<BarChartGroupData> _buildBarGroups() {
+    return List.generate(entities.length, (index) {
+      final entity = entities[index];
+      final value = entity.currTotalEgpIncome ?? 0;
 
       return BarChartGroupData(
         x: index,
         barRods: [
           BarChartRodData(
             toY: value,
-            width: 30,
+            width: 20,
             borderRadius: BorderRadius.circular(0),
-            color: color,
+            color: Colors.orange[600],
           ),
         ],
-        showingTooltipIndicators: [],
-        barsSpace: 10,
       );
     });
-  }
-
-  Widget _buildLegend() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          _legendItem('خصم عربات النوم', Colors.orange[600]!),
-          const SizedBox(width: 20),
-          _legendItem('خدمات عربات النوم', Colors.yellow[600]!),
-        ],
-      ),
-    );
-  }
-
-  Widget _legendItem(String label, Color color) {
-    return Row(
-      children: [
-        Container(
-          width: 10,
-          height: 10,
-          decoration: BoxDecoration(
-            color: color,
-            shape: BoxShape.circle,
-          ),
-        ),
-        const SizedBox(width: 6),
-        Text(label, style: const TextStyle(fontSize: 12)),
-      ],
-    );
   }
 }
